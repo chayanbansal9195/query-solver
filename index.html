@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Td Query Solver</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <style >
+    ::placeholder
+    {
+      background-color: #edd8d6;
+    }
+  </style>
+
+</head>
+<body style="background-image: url(i.jpg);">
+  <div class="container">
+    <h1 class="display-4 mb-4 well" style="font-family: sans-serif;background-image: url(0.jpg);-webkit-background-clip: text;-webkit-text-fill-color: transparent;" >Td Query Solver</h1>
+    <div class="d-flex ">
+      <button class="btn btn-primary mr-4 navbar-btn" id="getText">Quick Intro</button>
+      <button class="btn btn-warning mr-4" id="gethelp">Quick Help</button>
+
+    </div>
+    <hr>
+    <div id="output"></div>
+    <form id="addPost">
+      <div class="form-group">
+        <Lable><b style="font-family: courier;font-size: 30px;color: purple">Query Title</b></Lable><input type="text" id="title" class="form-control" placeholder="Add Title" style="width: 260px">
+      </div>
+      <div class="form-group">
+        <label><b style="font-family: courier;font-size: 25px;color: red;">Query Detail</b></label><textarea id="body" class="form-control" placeholder="Brief Your Query" style="width: 400px"></textarea>
+      </div>
+      <input type="submit" class="btn btn-secondary" value="Save">
+    </form>
+    <div id="update"></div>
+  </div>
+
+  <script>
+    document.getElementById('getText').addEventListener('click', getText);
+    document.getElementById('gethelp').addEventListener('click', gethelp);
+    document.getElementById('addPost').addEventListener('submit', addPost);
+
+    function getText(){
+    
+
+      fetch('intro.txt')
+      .then((res) => res.text())
+      .then((data) => {
+        document.getElementById('output').innerHTML = data;
+      })
+      .catch((err) => console.log(err))
+    }
+
+    function gethelp(){
+      fetch('users.json')
+      .then((res) => res.json())
+      .then((data) => {
+        let output = '<h2 class="mb-4">Quick Help</h2>';
+        data.forEach(function(user){
+          output += `
+            <ul class="list-group mb-3">
+              <li class="list-group-item">Command: ${user.Command}</li>
+              <li class="list-group-item">Purpose: ${user.Purpose}</li>
+           
+            </ul>
+          `;
+        });
+        document.getElementById('output').innerHTML = output;
+      })
+    }
+
+    
+
+    function addPost(e){
+      e.preventDefault();
+
+      let title = document.getElementById('title').value;
+      let body = document.getElementById('body').value;
+
+      fetch('https://jsonplaceholder.typicode.com/posts', {
+        method:'POST',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-type':'application/json'
+        },
+        body:JSON.stringify({title:title, body:body})
+      })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      
+    }
+  </script>
+</body>
+</html>

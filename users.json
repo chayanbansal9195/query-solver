@@ -1,0 +1,18 @@
+[
+{
+    "Command":"POST",
+    "Purpose":"Create an Object"
+  },
+  {
+    "Command":"GET",
+    "Purpose":"Fetch one or more objects"
+  },
+  {
+    "Command":"PUT",
+    "Purpose":"Update an object"
+  },
+  {
+    "Command":"DELETE",
+    "Purpose":"Remove an object"
+  }
+]

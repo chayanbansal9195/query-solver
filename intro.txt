@@ -1,0 +1,7 @@
+Add Your Query.<br/><br/>
+1.It can related to club.<br/>
+2.It can related to Domain.<br/>
+3.It can be related to Web Dev.<br/>
+4.It can be related to JSON.<br/><br/>
+
+Queries other than this are also accepted.<br/><br/><br/> 
